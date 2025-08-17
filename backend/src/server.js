@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import http from 'http';
 import { Server } from 'socket.io';
+import UserRouter from '../routes/router.js';
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("combined"));
 app.use(express.json());
+
+app.use('/api/users', UserRouter);
 
 const server = http.createServer(app);
 const io = new Server(server, {
